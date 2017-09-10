@@ -2,6 +2,7 @@ package com.example.demo.repositories;
 
 import com.example.demo.entity.Team;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,6 +12,9 @@ import java.util.List;
  */
 @Repository
 public interface TeamRepo extends JpaRepository<Team,Long> {
+     List<Team> findByPays(String pays);
+    Team findByPaysAndNom(String pays,String nom);
 
-    public List<Team> findByPays(String pays);
+    @Query("select t from Team t")
+    List<Team> getEquipe();
 }

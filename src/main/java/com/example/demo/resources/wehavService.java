@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by cherif.yazid on 10-09-2017.
@@ -27,12 +28,17 @@ public class wehavService {
 
 
     @RequestMapping("/yazid")
-    public String getTeamByPays(){
+    public List<String> getTeamByPays(){
 
-        List<Team> teams = teamRepo.findByPays("spain");
+      //  return teamRepo.findByPays("spain").stream().
+        //        map(e->e.getNom()).collect(Collectors.toList());
+          return teamRepo.getEquipe().stream().
+               map(e->e.getNom()).collect(Collectors.toList());
+        }
 
-        teams.stream().forEach(team -> System.out.println(team.getNom()));
+    @RequestMapping("/insertTeam")
+    public void addTeam(Team t){
 
-        return "test";
+        teamRepo.save(t);
     }
 }
