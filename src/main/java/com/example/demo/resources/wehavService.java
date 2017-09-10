@@ -27,8 +27,12 @@ public class wehavService {
 
 
     @RequestMapping("/yazid")
-    public List<Team> getTeamByPays(){
+    public String getTeamByPays(){
 
-        return teamRepo.findByPays("spain");
+        List<Team> teams = teamRepo.findByPays("spain");
+
+        teams.stream().forEach(team -> System.out.println(team.getNom()));
+
+        return "test";
     }
 }
